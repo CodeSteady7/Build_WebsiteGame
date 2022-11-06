@@ -5,7 +5,7 @@ export interface StepItemProps {
 	desc2?: string;
 }
 
-export default function StepItems(props: Part<StepItemProps>) {
+export default function StepItems(props: Partial<StepItemProps>) {
 	const { icon, title, desc1, desc2 } = props;
 
 	return (
