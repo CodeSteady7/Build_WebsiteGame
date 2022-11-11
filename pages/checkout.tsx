@@ -2,7 +2,11 @@ import Image from "next/image";
 import CheckoutConfirmation from "../components/organisms/CheckoutConfirmation";
 import CheckoutDetail from "../components/organisms/CheckoutDetail";
 import CheckoutItem from "../components/organisms/CheckoutItem";
-import { JWTPayloadTypes, UserTypes } from "../services/data-types/index";
+import {
+  JWTPayloadTypes,
+  UserTypes,
+  GetServerSideProps,
+} from "../services/data-types/index";
 import jwt_decode from "jwt-decode";
 
 interface CheckoutProps {
@@ -35,7 +39,7 @@ export default function Checkout(props: CheckoutProps) {
   );
 }
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req }: GetServerSideProps) {
   const { token } = req.cookies;
 
   if (!token) {

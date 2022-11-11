@@ -17,6 +17,8 @@ import "../styles/navbar-log-in.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const Data = () => {
@@ -65,6 +67,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         ></script> */}
       </Head>
       <Component {...pageProps} />
+      <ToastContainer />
     </>
   );
 }

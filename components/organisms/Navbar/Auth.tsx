@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
 import { JWTPayloadTypes, UserTypes } from "../../../services/data-types";
-import { useRouter } from "next/router";
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(false);
@@ -25,7 +25,7 @@ export default function Auth() {
       const userFromPayload: UserTypes = payload.player;
       const IMG = process.env.NEXT_PUBLIC_IMG;
       userFromPayload.avater = `${IMG}/${userFromPayload.avater}`;
-      console.log(" user.avater => ", user.avater);
+      // console.log(" user.avater => ", user.avater);
       setUser(user);
       setIsLogin(true);
     }
@@ -36,7 +36,7 @@ export default function Auth() {
     router.push("/");
     setIsLogin(false);
   };
-  console.log("isLogin", isLogin);
+  // console.log("isLogin", isLogin);
   if (isLogin) {
     return (
       <li className='nav-item my-auto dropdown d-flex'>

@@ -3,33 +3,54 @@ import NominalItem from "./NominalItem";
 import PaymentItem from "./PaymentItem";
 import { NominalsTypes, PaymentTypes } from "../../../services/data-types";
 import { BanksTypes } from "../../../services/data-types/index";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 interface TopUpFormProps {
   nominals: NominalsTypes[];
   payments: PaymentTypes[];
 }
-
 export default function TopUpForm(props: TopUpFormProps) {
   const [verifyID, setVerifyID] = useState("");
   const [bankAccountName, setBankAccountName] = useState("");
+  const [nominalItem, setNominalItem] = useState({});
+  const [paymentItem, setPaymentItem] = useState({});
   const { nominals, payments } = props;
+  const router = useRouter();
 
   const onNominalItemClick = (data: NominalsTypes) => {
-    console.log("data", data);
-    localStorage.setItem("nominal-item", JSON.stringify(data));
+    setNominalItem(data);
   };
 
   const onPaymentItemChange = (payment: PaymentTypes, bank: BanksTypes) => {
-    console.log("payment", payment);
-    console.log("bank", bank);
     const data = {
       payment,
       bank,
     };
-
-    localStorage.setItem("payment-item", JSON.stringify(data));
+    setPaymentItem(data);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    if (
+      verifyID === "" ||
+      bankAccountName === "" ||
+      nominalItem === {} ||
+      paymentItem === {}
+    ) {
+      toast.error("Silahkan isi semua data");
+    } else {
+      const data = {
+        verifyID,
+        bankAccountName,
+        nominalItem,
+        paymentItem,
+      };
+      console.log("data", data);
+      localStorage.setItem("data-topup", JSON.stringify(data));
+      router.push("/checkout");
+    }
+    // localStorage.setItem("nominal-item", JSON.stringify(data));
+    // localS   torage.setItem("payment-item", JSON.stringify(data));
+  };
   return (
     <form action='./checkout.html' method='POST'>
       <div className='pt-md-50 pt-30'>

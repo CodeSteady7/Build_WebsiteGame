@@ -1,10 +1,33 @@
 import axios, { AxiosRequestConfig } from "axios";
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
+interface CallApiProps extends AxiosRequestConfig {
+  token?: boolean;
+  serverToken?: string;
+}
 
-export default async function callAPI({ url, method, data }: AxiosRequestConfig) {
+export default async function callAPI({ url, method, data, token, serverToken }: CallApiProps) {
+  let headers = {}
+  if (serverToken) {
+    headers = {
+      authorization: `${serverToken}`
+    }
+  } else if (token) {
+    const tokenCookies = Cookies.get("token");
+    if (tokenCookies) {
+      const jwtToken = atob(tokenCookies);
+      // console.log('jwt', jwtToken)
+      headers = {
+        authorization: `${jwtToken}`
+      }
+    }
+  }
+
   const response = await axios({
     url,
     method,
     data,
+    headers,
   }).catch((err) => err.response);
   if (response.status > 300) {
     const res = {
@@ -15,10 +38,14 @@ export default async function callAPI({ url, method, data }: AxiosRequestConfig)
     return res;
   }
 
+
+  const { length } = Object.keys(response.data)
+  // console.log('length', length)
   const res = {
     error: false,
     message: "success",
-    data: response.data.data,
+    // data: response.data.count ? response.data : response.data.data,
+    data: length > 1 ? response.data : response.data.data,
   };
 
   return res;
