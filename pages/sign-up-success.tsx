@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useEffect } from "react";
 
 export default function SignUpSuccess() {
   // [CODE UPDATE] saya menambahkan remove user-form disini

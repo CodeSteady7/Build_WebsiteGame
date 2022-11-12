@@ -25,7 +25,6 @@ export default function Auth() {
       const userFromPayload: UserTypes = payload.player;
       const IMG = process.env.NEXT_PUBLIC_IMG;
       userFromPayload.avater = `${IMG}/${userFromPayload.avater}`;
-      // console.log(" user.avater => ", user.avater);
       setUser(user);
       setIsLogin(true);
     }
@@ -36,7 +35,6 @@ export default function Auth() {
     router.push("/");
     setIsLogin(false);
   };
-  // console.log("isLogin", isLogin);
   if (isLogin) {
     return (
       <li className='nav-item my-auto dropdown d-flex'>

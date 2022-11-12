@@ -11,12 +11,11 @@ export default function TransactionContent() {
   const [transactions, setTransactions] = useState([]);
   const [tab, setTab] = useState("all");
 
-  const getMemberTransactionAPI = useCallback(async (value) => {
+  const getMemberTransactionAPI = useCallback(async (value?: string) => {
     const response = await getMemberTransaction(value);
     if (response.error) {
       toast.error(response.message);
     } else {
-      console.log("response ", response.data);
       setTotal(response.data.total);
       setTransactions(response.data.data);
     }
@@ -26,7 +25,7 @@ export default function TransactionContent() {
     getMemberTransactionAPI();
   }, []);
 
-  const onTabClick = (value) => {
+  const onTabClick = (value: string) => {
     setTab(value);
     getMemberTransactionAPI(value);
   };

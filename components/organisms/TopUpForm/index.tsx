@@ -33,8 +33,8 @@ export default function TopUpForm(props: TopUpFormProps) {
     if (
       verifyID === "" ||
       bankAccountName === "" ||
-      nominalItem === {} ||
-      paymentItem === {}
+      nominalItem === null ||
+      paymentItem === null
     ) {
       toast.error("Silahkan isi semua data");
     } else {
@@ -44,7 +44,6 @@ export default function TopUpForm(props: TopUpFormProps) {
         nominalItem,
         paymentItem,
       };
-      console.log("data", data);
       localStorage.setItem("data-topup", JSON.stringify(data));
       router.push("/checkout");
     }
@@ -52,7 +51,7 @@ export default function TopUpForm(props: TopUpFormProps) {
     // localS   torage.setItem("payment-item", JSON.stringify(data));
   };
   return (
-    <form action='./checkout.html' method='POST'>
+    <>
       <div className='pt-md-50 pt-30'>
         <div className=''>
           <label
@@ -136,6 +135,6 @@ export default function TopUpForm(props: TopUpFormProps) {
           Continue
         </button>
       </div>
-    </form>
+    </>
   );
 }

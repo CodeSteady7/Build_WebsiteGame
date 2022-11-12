@@ -16,12 +16,10 @@ export default function EditProfile() {
     email: "",
     avater: "",
   });
-  console.log("user =>", user);
 
   const router = useRouter();
   const IMG = process.env.NEXT_PUBLIC_IMG;
   const [imagePreview, setImagePreview] = useState("");
-  // console.log("imagePreview", imagePreview);
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
@@ -38,13 +36,11 @@ export default function EditProfile() {
 
     data.append("image", user.avater);
     data.append("name", user.name);
-    // console.log("formdata => ", ...data);
     const response = await updateProfile(data, user.id);
     if (response.error) {
       toast.error(response.message);
     } else {
       toast.success(response.message);
-      console.log("response ", response.data);
       Cookies.remove("token");
       router.push("/sign-in");
     }
@@ -83,7 +79,7 @@ export default function EditProfile() {
                     name='avatar'
                     accept='image/png, image/jpeg'
                     onChange={(event) => {
-                      const img = event.target.files[0];
+                      const img = event.target.files![0];
                       setImagePreview(URL.createObjectURL(img));
                       let imgConvert = URL.createObjectURL(img);
                       return setUser({

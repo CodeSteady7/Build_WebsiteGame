@@ -10,7 +10,6 @@ export default function TransactionDetailContent(
   props: TransactionDetailContentProps
 ) {
   const { data } = props;
-  console.log("data", data);
 
   const IMG = process.env.NEXT_PUBLIC_IMG;
   return (

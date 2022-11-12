@@ -8,6 +8,7 @@ export default function Profile() {
     avater: "",
     username: "",
     email: "",
+    name: "",
   });
 
   const IMG = process.env.NEXT_PUBLIC_IMG;

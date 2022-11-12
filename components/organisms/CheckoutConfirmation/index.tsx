@@ -34,8 +34,6 @@ export default function CheckoutConfirmation() {
       toast.success("Checkout Berhasil");
       router.push("/complete-checkout");
     }
-
-    console.log("data", response);
   };
   return (
     <>

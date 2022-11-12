@@ -16,7 +16,6 @@ export default async function callAPI({ url, method, data, token, serverToken }:
     const tokenCookies = Cookies.get("token");
     if (tokenCookies) {
       const jwtToken = atob(tokenCookies);
-      // console.log('jwt', jwtToken)
       headers = {
         authorization: `${jwtToken}`
       }
@@ -40,7 +39,6 @@ export default async function callAPI({ url, method, data, token, serverToken }:
 
 
   const { length } = Object.keys(response.data)
-  // console.log('length', length)
   const res = {
     error: false,
     message: "success",

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { NumericFormat } from "react-number-format";
 interface RowProps {
   label: string;
